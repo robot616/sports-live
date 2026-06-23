@@ -34,7 +34,6 @@
         .channel-list::-webkit-scrollbar { width: 6px; }
         .channel-list::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
         
-        /* تصميم قائمة كأس العالم فقط */
         .category-header.world-cup {
             color: #ffca28; font-size: 16px; font-weight: bold;
             padding: 10px; border-right: 3px solid #ffca28;
@@ -50,13 +49,14 @@
         .channel-btn.active { background: #1dcf60; color: #fff; }
         .player-wrapper { flex: 1; position: relative; background: #000; }
         #player { position: absolute !important; top: 0; right: 0; bottom: 0; left: 0; width: 100% !important; height: 100% !important; }
+        
         @media (max-width: 768px) {
             .app-container { flex-direction: column; }
             .player-wrapper { height: 40vh; flex: none; }
             .sidebar { width: 100%; height: 60vh; border-left: none; border-top: 1px solid #333; }
         }
-        
-        /* أيقونة الفول سكرين الاحترافية اللي ظبطناها */
+
+        /* الاحتفاظ بالتصميم المخصص لأيقونة الفول سكرين الأنيقة */
         .jw-icon-fullscreen svg { display: none !important; }
         .jw-icon-fullscreen {
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNOCAzSDVhMiAyIDAgMCAwLTIgMnYzbTE4IDBWNWEyIDIgMCAwIDAtMi0yaC0zbTAgMThoM2EyIDIgMCAwIDAgMi0ydi0zTTMgMTZ2M2EyIDIgMCAwIDAgMiAyaDMiLz48L3N2Zz4=');
@@ -132,7 +132,7 @@
             { name: "FOX Sports 2 US", url: "https://otte.live.fly.ww.aiv-cdn.net/iad-nitro/live/clients/dash/enc/awxnrqkbo5/out/v1/716529a4091947b0877e6cb80dbd6ccb/cenc.mpd", k1: "09453ce820d65fbc675de3185f9e454c", k2: "98cff9600995fa381c76fdacf3c7edae" },
             { name: "FUBO SPORTS", url: "https://otte.cache.aiv-cdn.net/syd-nitro/live/dash/enc/3b7qwiqzk3/out/v1/9f14895badca43e6a716db021dcd0c31/cenc.mpd", k1: "dc69b6159a0f9f0a4e03b3ff91cbacd5", k2: "d0dcbcd7723bc40df0bf34c9c092d51f" },
             { name: "CBS SPORTS", url: "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/rbem8rorcw/out/v1/5318821e2c3c44c2a439681b9aa86e9b/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
-            { name: "TSN 2", url: "https://live1.egmdispatch.com/live/527rjsw2xxxb4ke_a0608e5f2d1293c5671efa90b1bc92bd_1080p.m3u8?auth_key=1781411903-0-0-5b50313b244f50d1649c25b1074fbfab", k1: "daa8ea92553fd16cd6bfae2b8c582715", k2: "4042e041b5639b79b69ae07a872eef9b" },
+            { name: "TSN 2", url: "https://live1.egmdispatch.com/live/527rjsw2xxxb4ke_a0608e5f2d1293c5671efa90b1bc92bd_1080p.m3u8?auth_key=1781411903-0-0-5b50313b244f50d1649c25b1074fbfab", k1: null, k2: null },
             { name: "TSN 3", url: "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/mrskysvotx/out/v1/ad58961bd8fd48d2944e461c034b8914/cenc.mpd", k1: "d9097a1b7d04b7786b29f2b0e155316d", k2: "279695ebe0fb1bc5787422b6b59ce8a8" },
             { name: "TSN 4", url: "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/irtfdsri14/out/v1/165128c314e944faa3d79e107974b323/cenc.mpd", k1: "e1aa4c4daf6222a04f7ae80130495ea1", k2: "31bb1ee9a8d088f62b0103550c301449" },
             { name: "TSN 5", url: "https://ottb.live.cf.ww.aiv-cdn.net/dub-nitro/live/dash/enc/mttgh1c4ei/out/v1/9cc664b146744e2ba23066aa048efbc5/cenc.mpd", k1: "8ce20e2a4b3dd04e0a6e5469b7cb47be", k2: "163c323b65d0597b13f037641fd67b1e" },
@@ -234,14 +234,11 @@
             if (!filterText) filterText = "";
             var listContainer = document.getElementById("channelList");
             listContainer.innerHTML = "";
-            
             var addedWorldCupHeader = false;
 
             for (var i = 0; i < channels.length; i++) {
                 var channel = channels[i];
-                
                 if (channel.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1) {
-                    
                     if (channel.isWorldCup && !addedWorldCupHeader && filterText === "") {
                         var wcHeader = document.createElement("div");
                         wcHeader.className = "category-header world-cup";
@@ -253,18 +250,14 @@
                     var btn = document.createElement("div");
                     btn.className = "channel-btn";
                     btn.id = "btn-" + i;
-                    
                     var typeBadge = channel.url.indexOf(".m3u8") !== -1 ? "HLS" : "DASH";
 
                     btn.innerHTML = '<span>' + channel.name + '</span>' +
                                     '<span style="font-size: 10px; color: #aaa; background: #333; padding: 2px 6px; border-radius: 4px;">' + typeBadge + '</span>';
                     
                     (function(index) {
-                        btn.onclick = function() {
-                            playChannel(index);
-                        };
+                        btn.onclick = function() { playChannel(index); };
                     })(i);
-                    
                     listContainer.appendChild(btn);
                 }
             }
@@ -272,11 +265,8 @@
 
         function playChannel(index) {
             var channel = channels[index];
-            
             var allBtns = document.querySelectorAll(".channel-btn");
-            for (var j = 0; j < allBtns.length; j++) {
-                allBtns[j].classList.remove("active");
-            }
+            for (var j = 0; j < allBtns.length; j++) { allBtns[j].classList.remove("active"); }
             var activeBtn = document.getElementById("btn-" + index);
             if(activeBtn) activeBtn.classList.add("active");
 
@@ -288,16 +278,15 @@
             };
 
             if (channel.k1 && channel.k2) {
-                setupConfig.drm = {
-                    clearkey: { keyId: channel.k1, key: channel.k2 }
-                };
+                setupConfig.drm = { clearkey: { keyId: channel.k1, key: channel.k2 } };
             }
 
             playerInstance = jwplayer("player").setup(setupConfig);
 
             playerInstance.on('ready', function() {
                 var isStretched = false;
-                var diagonalCutArrow = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQgMTBsNy03bS02IDBoNnY2bS0xMSA1bC03IDdtNiAwSDN2LTYiLz48L3N2Zz4=";
+                // كود التشفير السليم 100% للرسمة عشان تظهر جوه البلاير
+                var diagonalCutArrow = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQgMTBsNy03bS02IDBoNnY2bS0xMSA1bC03IDdtNiAwSDN2LTYiLz48L3N2Zz4=";
 
                 playerInstance.addButton(
                     diagonalCutArrow, 
