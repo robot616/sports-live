@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Live</title>
+    <title>Sports Live - beIN XTRA</title>
     
     <link rel="icon" type="image/png" sizes="512x512" href="https://img.icons8.com/fluency/512/play.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="https://img.icons8.com/fluency/512/play.png">
     <meta name="apple-mobile-web-app-title" content="Sports Live">
 
     <script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
@@ -33,12 +32,6 @@
         .channel-list { flex: 1; overflow-y: auto; padding: 10px; }
         .channel-list::-webkit-scrollbar { width: 6px; }
         .channel-list::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
-        
-        .category-header.world-cup {
-            color: #ffca28; font-size: 16px; font-weight: bold;
-            padding: 10px; border-right: 3px solid #ffca28;
-            background: #332900; border-radius: 4px; margin-bottom: 5px;
-        }
 
         .channel-btn {
             background: #222; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px;
@@ -56,7 +49,6 @@
             .sidebar { width: 100%; height: 60vh; border-left: none; border-top: 1px solid #333; }
         }
 
-        /* الاحتفاظ بالتصميم المخصص لأيقونة الفول سكرين الأنيقة */
         .jw-icon-fullscreen svg { display: none !important; }
         .jw-icon-fullscreen {
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNOCAzSDVhMiAyIDAgMCAwLTIgMnYzbTE4IDBWNWEyIDIgMCAwIDAtMi0yaC0zbTAgMThoM2EyIDIgMCAwIDAgMi0ydi0zTTMgMTZ2M2EyIDIgMCAwIDAgMiAyaDMiLz48L3N2Zz4=');
@@ -82,145 +74,104 @@
     </div>
 
     <script>
-        var channels = [
-            
-            // ==========================================
-            // القنوات العربية
-            // ==========================================
-            { name: "StarzPlay Live", url: "https://sps1.starzplayarabia.com/out/v1/eee188845e9543699fd24e5a9890c6e2/index.mpd", k1: "b253c726c24c7c94a3ddf9b1907e2c76", k2: "097963d6ad73c3d712a104981de0ed42" },
-            
-            // ==========================================
-            // الشبكات البريطانية (Sky & TNT & Premier)
-            // ==========================================
-            { name: "Premier 1 UK", url: "https://a166aivottlinear-a.akamaihd.net/OTTB/fra-nitro/live/dash/enc/vwq77hfgzw/out/v1/b858e0b845c64cec953887bd4269e4ea/cenc.mpd", k1: "1444f4235529f183f0a5a486befe9cdb", k2: "e5e3fec67a1bb3472a2089c8a0a2557f" },
-            { name: "Premier 2 UK", url: "https://a205aivottlinear-a.akamaihd.net/IAD/lhr-nitro/live/clients/dash/enc/bcj3iscpd6/out/v1/fcd137b391214f7cb99dd4d7be90ca87/cenc.mpd", k1: "1a5df53609ebc9857898c490f4724918", k2: "77f62980d582ec541280796acf8b2d19" },
-            { name: "Premier 1 Ireland", url: "https://smarthard.click/hls/nUqz0la0vjgW/index.m3u8", k1: "1444f4235529f183f0a5a486befe9cdb", k2: "e5e3fec67a1bb3472a2089c8a0a2557f" },
-            
-            // ==========================================
-            // الشبكات الأمريكية والكندية والأسترالية
-            // ==========================================
-            { name: "beIN Sports 1", url: "https://otte.live.fly.ww.aiv-cdn.net/syd-nitro/live/clients/dash/enc/ghwcl6hv68/out/v1/83536910d8034e9b9895a20fbe1c1687/cenc.mpd", k1: "335dad778109954503dcbb21dc92015f", k2: "24bfd75d436cbf73168a2a2dccd40281" },
-            { name: "beIN Sports 2", url: "https://a166aivottlinear-a.akamaihd.net/OTTB/syd-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1/83985c68e4174e90a58a1f2c024be4c9/cenc.mpd", k1: "0b42be2664d7e811d04f3e504e0924c5", k2: "ae24090123b8c72ac5404dc152847cb8" },
-            { name: "beIN Sports 3", url: "https://a201aivottlinear-a.akamaihd.net/OTTB/syd-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd", k1: "7995c724a13748ed970840a8ab5bb9b3", k2: "67bdaf1e2175b9ff682fcdf0e2354b1e" },
-            { name: "beIN XTRA En", url: "https://bein-beinxtrasports-firetv.amagi.tv/playlist.m3u8" },
-            { name: "beIN XTRA ES", url: "https://bein-esp-xumo.amagi.tv/playlist.m3u8" },
-             
-            // ==========================================
-            // الشبكات اللاتينية والإسبانية
-            // ==========================================
-            { name: "Live 1 (LatAm)", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/dash/enc/3gg2jnixjn/out/v1/e1840e01f3f14563b66bbb944d5cc54c/cenc.mpd", k1: "f8b207c10f3f76aeba32a360ec52b9e4", k2: "afad49d20eb39670e93e371c1d669921" },
-            { name: "Live 2 (LatAm)", url: "https://pull.niues.live/live/stream-599634_lhd.m3u8?auth_key=1778700354-0-0-e96025ef17afc021f3662327a0f74656", k1: null, k2: null },
-            { name: "DAZN FAST", url: "https://dyqiabnsd224t.cloudfront.net/dash/dazn-linear-504/stream.mpd", k1: "8ab47741930c476780515f9a00decb0a", k2: "7ab4b9ae5a48aa526e511a913b832769" },            
-            
-            // ==========================================
-            // الشبكات البرازيلية
-            // ==========================================
-            { name: "Caze TV", url: "https://a121aivottepl-a.akamaihd.net/gru-nitro/live/clients/dash/enc/jo3rmhhp2r/out/v1/50656942ce4e40a1be824c9d83578fe9/cenc.mpd", k1: "34475edab991ad5e92548aebd710410a", k2: "501b209cccd323ac00bf5ac15b406cb4" },
-            { name: "BANDSPORTS", url: "https://cdn-brisanet.cportal.com.br/BANDEIRANT/DASH/stream.mpd", k1: "bf4ed0d53f284514a5724052736edd13", k2: "b374c809058541966bed5e4716af55f4" },
-            
-            // ==========================================
-            // الشبكات الألمانية والهولندية والأوروبية
-            // ==========================================
-            { name: "SPD DE", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/ssdefyhkkr/out/v1/cf01290cb7f64525bdf861580a016ca8/cenc.mpd", k1: "0ad4080cdff8c60b1233b22087f0b340", k2: "285f129c5eca01dd08a5d5a14ad801c8" },
-            { name: "FOX Sports DE", url: "https://a122aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/clients/dash/enc/vkpoljjpkj/out/v1/502bcf68b3514cd28a220e6f0a43816f/cenc.mpd", k1: "d1a163914db8ffad2c3e94f979896a0d", k2: "9728800a3959aafdd5b0bcfbf3768811" },
-            { name: "NOVA 2 Sport", url: "https://dash2.antik.sk/stream/nvidia_nova_sport1/playlist_cenc.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
-            { name: "Sport 1 SK", url: "https://dash2.antik.sk/stream/nvidia_sport_1/playlist_cbcs.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
-            { name: "Joj Sport 2", url: "https://dash2.antik.sk/stream/nvidia_joj_sport_2/playlist_cbcs.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
-            { name: "N Sports", url: "https://ogc-nsprt.otteravision.com/ogc/nsprt/nsprt.m3u8", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
+        try {
+            // مصفوفة القنوات (تأكد دايماً إن مفيش أقواس ناقصة هنا)
+            var channels = [
+                { name: "beIN XTRA En", url: "https://bein-beinxtrasports-firetv.amagi.tv/playlist.m3u8" },
+                { name: "beIN XTRA ES", url: "https://bein-esp-xumo.amagi.tv/playlist.m3u8" }
+            ];
 
-            // ==========================================
-            // القنوات الترفيهية التي تنقل المباريات
-            // ==========================================
-            { name: "Channel 4", url: "https://olsp.live.dash.c4assets.com/dash_iso_sp_tl/live/channel(4s)/manifest.mpd", k1: "0000000000000000000000000034730a", k2: "19bfb83e0e0f40f6eef4eccedbfa7bb8" },
-            { name: "Canale 5 (Italy)", url: "https://live03p-seg.msf.cdn.mediaset.net/live/ch-c5/c5-dash-widevine.isml/manifest.mpd", k1: "00f9f3c0783536b8ce4a30a01a52e082", k2: "e926f7d45af4f7d154c990eae6a2d937" },
-            { name: "ITALIA 1 (Italy)", url: "https://live03p-seg.msf.cdn.mediaset.net/live/ch-i1/i1-dash-widevine.isml/manifest.mpd", k1: "00f9f3c0783536b8ee91704e23b78016", k2: "bfd04d6f544c9cc4d35cb13ab6778587" },
-        ];
+            var playerInstance = null;
 
-        var playerInstance = null;
+            function renderChannels(filterText) {
+                if (!filterText) filterText = "";
+                var listContainer = document.getElementById("channelList");
+                listContainer.innerHTML = "";
 
-        function renderChannels(filterText) {
-            if (!filterText) filterText = "";
-            var listContainer = document.getElementById("channelList");
-            listContainer.innerHTML = "";
-            var addedWorldCupHeader = false;
+                for (var i = 0; i < channels.length; i++) {
+                    var channel = channels[i];
+                    if (channel.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1) {
+                        var btn = document.createElement("div");
+                        btn.className = "channel-btn";
+                        btn.id = "btn-" + i;
+                        var typeBadge = channel.url.indexOf(".m3u8") !== -1 ? "HLS" : "DASH";
 
-            for (var i = 0; i < channels.length; i++) {
-                var channel = channels[i];
-                if (channel.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1) {
-                    if (channel.isWorldCup && !addedWorldCupHeader && filterText === "") {
-                        var wcHeader = document.createElement("div");
-                        wcHeader.className = "category-header world-cup";
-                        wcHeader.innerText = "🏆 World Cup 2026";
-                        listContainer.appendChild(wcHeader);
-                        addedWorldCupHeader = true;
+                        btn.innerHTML = '<span>' + channel.name + '</span>' +
+                                        '<span style="font-size: 10px; color: #aaa; background: #333; padding: 2px 6px; border-radius: 4px;">' + typeBadge + '</span>';
+                        
+                        (function(index) {
+                            btn.onclick = function() { playChannel(index); };
+                        })(i);
+                        listContainer.appendChild(btn);
                     }
-
-                    var btn = document.createElement("div");
-                    btn.className = "channel-btn";
-                    btn.id = "btn-" + i;
-                    var typeBadge = channel.url.indexOf(".m3u8") !== -1 ? "HLS" : "DASH";
-
-                    btn.innerHTML = '<span>' + channel.name + '</span>' +
-                                    '<span style="font-size: 10px; color: #aaa; background: #333; padding: 2px 6px; border-radius: 4px;">' + typeBadge + '</span>';
-                    
-                    (function(index) {
-                        btn.onclick = function() { playChannel(index); };
-                    })(i);
-                    listContainer.appendChild(btn);
                 }
             }
-        }
 
-        function playChannel(index) {
-            var channel = channels[index];
-            var allBtns = document.querySelectorAll(".channel-btn");
-            for (var j = 0; j < allBtns.length; j++) { allBtns[j].classList.remove("active"); }
-            var activeBtn = document.getElementById("btn-" + index);
-            if(activeBtn) activeBtn.classList.add("active");
+            function playChannel(index) {
+                // فحص إذا كان المتصفح حظر مكتبة المشغل
+                if (typeof jwplayer === 'undefined') {
+                    document.getElementById('player').innerHTML = '<h3 style="color:#ff4d4d; text-align:center; margin-top:20%; font-family:tahoma;">تم حظر مشغل الفيديو!<br>يرجى إيقاف مانع الإعلانات (AdBlock) وعمل تحديث للصفحة.</h3>';
+                    return;
+                }
 
-            var setupConfig = {
-                file: channel.url,
-                type: channel.url.indexOf(".m3u8") !== -1 ? "hls" : "dash",
-                width: "100%", height: "100%",
-                autostart: true, preload: "auto", stretching: "uniform"
-            };
+                var channel = channels[index];
+                var allBtns = document.querySelectorAll(".channel-btn");
+                for (var j = 0; j < allBtns.length; j++) { allBtns[j].classList.remove("active"); }
+                var activeBtn = document.getElementById("btn-" + index);
+                if(activeBtn) activeBtn.classList.add("active");
 
-            if (channel.k1 && channel.k2) {
-                setupConfig.drm = { clearkey: { keyId: channel.k1, key: channel.k2 } };
+                var setupConfig = {
+                    file: channel.url,
+                    type: channel.url.indexOf(".m3u8") !== -1 ? "hls" : "dash",
+                    width: "100%", height: "100%",
+                    autostart: true, preload: "auto", stretching: "uniform"
+                };
+
+                // وضع مفاتيح التشفير لو موجودة
+                if (channel.k1 && channel.k2) {
+                    setupConfig.drm = { clearkey: { keyId: channel.k1, key: channel.k2 } };
+                }
+
+                playerInstance = jwplayer("player").setup(setupConfig);
+
+                playerInstance.on('ready', function() {
+                    var isStretched = false;
+                    var diagonalCutArrow = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQgMTBsNy03bS02IDBoNnY2bS0xMSA1bC03IDdtNiAwSDN2LTYiLz48L3N2Zz4=";
+
+                    playerInstance.addButton(
+                        diagonalCutArrow, 
+                        "توسيع/تضييق الصورة", 
+                        function() {
+                            if (!isStretched) {
+                                playerInstance.setConfig({ stretching: "exactfit" }); 
+                                isStretched = true;
+                            } else {
+                                playerInstance.setConfig({ stretching: "uniform" });
+                                isStretched = false;
+                            }
+                        },
+                        "stretch-button"
+                    );
+                });
+                
+                // تنبيه لو الرابط مش شغال أو محظور جغرافياً
+                playerInstance.on('error', function() {
+                    console.log("خطأ في تشغيل الرابط: قد يكون محظوراً في دولتك.");
+                });
             }
 
-            playerInstance = jwplayer("player").setup(setupConfig);
+            function filterChannels() {
+                var text = document.getElementById("searchInput").value;
+                renderChannels(text);
+            }
 
-            playerInstance.on('ready', function() {
-                var isStretched = false;
-                // كود التشفير السليم 100% للرسمة عشان تظهر جوه البلاير
-                var diagonalCutArrow = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQgMTBsNy03bS02IDBoNnY2bS0xMSA1bC03IDdtNiAwSDN2LTYiLz48L3N2Zz4=";
+            renderChannels("");
+            if(channels.length > 0) playChannel(0);
 
-                playerInstance.addButton(
-                    diagonalCutArrow, 
-                    "توسيع/تضييق الصورة", 
-                    function() {
-                        if (!isStretched) {
-                            playerInstance.setConfig({ stretching: "exactfit" }); 
-                            isStretched = true;
-                        } else {
-                            playerInstance.setConfig({ stretching: "uniform" });
-                            isStretched = false;
-                        }
-                    },
-                    "stretch-button"
-                );
-            });
+        } catch (error) {
+            // لو مسحت قوس بالغلط أو بوظت الكود هيظهرلك ده في نص الشاشة
+            document.body.innerHTML = '<h2 style="color:red; text-align:center; padding:50px;">يوجد خطأ برمجي في الكود: <br>' + error.message + '</h2>';
         }
-
-        function filterChannels() {
-            var text = document.getElementById("searchInput").value;
-            renderChannels(text);
-        }
-
-        renderChannels("");
-        if(channels.length > 0) playChannel(0);
-
     </script>
 </body>
 </html>
