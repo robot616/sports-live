@@ -58,30 +58,6 @@
         .jw-flag-fullscreen .jw-icon-fullscreen {
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNOCAzdjNhMiAyIDAgMCAxLTIgMkgzbTE4IDBoLTNhMiAyIDAgMCAxLTItMlYzbTAgMThoM2EyIDIgMCAwIDEgMiAydjMiLz48L3N2Zz4=');
         }
-
-        /* ستايل القائمة العائمة لاختيار الجودة */
-        .channel-menu {
-            display: none; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); background: rgba(20, 20, 20, 0.95);
-            backdrop-filter: blur(10px); border: 1px solid #444; border-radius: 12px;
-            padding: 20px; z-index: 99999; flex-direction: column; gap: 10px;
-            min-width: 260px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-        }
-        .channel-menu.active {
-            display: flex;
-            animation: popIn 0.2s ease-out;
-        }
-        @keyframes popIn {
-            0% { opacity: 0; transform: translate(-50%, -45%) scale(0.95); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-        .channel-menu-header {
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid #444; padding-bottom: 12px; margin-bottom: 10px;
-        }
-        .channel-menu-header h3 { margin: 0; color: #fff; font-size: 16px; }
-        .close-btn { cursor: pointer; color: #ff4d4d; font-size: 26px; line-height: 1; font-weight: bold; transition: 0.2s; }
-        .close-btn:hover { color: #ff1a1a; transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -89,16 +65,6 @@
     <div class="app-container">
         <div class="player-wrapper">
             <div id="player"></div>
-            
-            <!-- القائمة العائمة لاختيار الجودات -->
-            <div id="qualityMenu" class="channel-menu" dir="rtl">
-                <div class="channel-menu-header">
-                    <h3>تغيير الجودة ⚙️</h3>
-                    <span class="close-btn" onclick="document.getElementById('qualityMenu').classList.remove('active')">&times;</span>
-                </div>
-                <div id="qualityList" style="display:flex; flex-direction:column; gap:5px; max-height: 250px; overflow-y:auto; padding-right:5px;"></div>
-            </div>
-
         </div>
         <div class="sidebar">
             <div class="search-box">
@@ -110,7 +76,6 @@
 
     <script>
         var channels = [
-            
             // ==========================================
             // القنوات العربية
             // ==========================================
@@ -157,7 +122,7 @@
             { name: "TSN 4", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/ihys8nw4wv/out/v1/fde190f369484bc6b6117cc16cd82a9f/cenc.mpd", k1: "abc5b2883121012850ebda05b528c5ec", k2: "e5250924f4b738905f7163a0134587a7" },
             { name: "TSN 5", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cscevwljkq/out/v1/972185041b244140860b7d56398e9aaf/cenc.mpd", k1: "385ceb9714b75e0cef61254f80b31002", k2: "18dce92a2891fee68d21ede5173230f8" },
             { name: "CBS SPORTS", url: "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/rbem8rorcw/out/v1/5318821e2c3c44c2a439681b9aa86e9b/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
-            { name: "Cbs Sports", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd", cat: "Live Sports", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
+            { name: "Cbs Sports", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
             { name: "CBS SPORTS", url: "https://jmp2.uk/plu-5e9f2c05172a0f0007db4786.m3u8" },
             { name: "CBS Golazo", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/rbem8rorcw/out/v1/5318821e2c3c44c2a439681b9aa86e9b/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
             { name: "CBS Sports Golazo Network", url: "https://bia-cf.live.pv-cdn.net/iad-nitro/live/clients/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
@@ -264,11 +229,10 @@
             { name: "TV AZTECA MX", url: "https://azt-cl.otteravision.com/azt/cl/cl.m3u8" },
             { name: "RCN + COL", url: "https://rcntv-rcnmas-1-us.roku.wurl.tv/playlist.m3u8" },
             { name: "Tv J 🇯🇲", url: "https://vod2live.univtec.com/manifest/a99a1804-dc83-411f-8c1c-b62f08cdfa59.m3u8" },
-            { name: "Channel 5 SG", url: "https://tglmp02.akamaized.net/out/v1/a32e566460eb41ce9295b9c45fe25825/manifest.mpd", k1: "cc3767ece98a4bdeb39b9ad6b7b8d2fe", k2: "769e78dc02d8f73811c97e0f9d5f12fe" }
+            { name: "Channel 5 Sing", url: "https://tglmp02.akamaized.net/out/v1/a32e566460eb41ce9295b9c45fe25825/manifest.mpd", k1: "cc3767ece98a4bdeb39b9ad6b7b8d2fe", k2: "769e78dc02d8f73811c97e0f9d5f12fe" }
         ];
 
         var playerInstance = null;
-        var isQualityButtonAdded = false;
 
         function renderChannels(filterText) {
             if (!filterText) filterText = "";
@@ -295,46 +259,12 @@
             }
         }
 
-        function toggleQualityMenu() {
-            var menu = document.getElementById('qualityMenu');
-            if(menu.classList.contains('active')) {
-                menu.classList.remove('active');
-                return;
-            }
-            
-            var levels = playerInstance.getQualityLevels();
-            var currentQuality = playerInstance.getCurrentQuality();
-            var listContainer = document.getElementById('qualityList');
-            listContainer.innerHTML = '';
-            
-            if(levels && levels.length > 1) {
-                levels.forEach(function(lvl, index) {
-                    var btn = document.createElement('div');
-                    btn.className = 'channel-btn';
-                    if(index === currentQuality) btn.classList.add('active');
-                    
-                    var qualityName = lvl.label || (lvl.height ? lvl.height + 'p' : 'جودة ' + (index + 1));
-                    btn.innerHTML = '<span>' + qualityName + '</span>';
-                    
-                    btn.onclick = function() {
-                        playerInstance.setCurrentQuality(index);
-                        menu.classList.remove('active');
-                    };
-                    listContainer.appendChild(btn);
-                });
-            }
-            menu.classList.add('active');
-        }
-
         function playChannel(index) {
             var channel = channels[index];
             var allBtns = document.querySelectorAll(".channel-btn");
             for (var j = 0; j < allBtns.length; j++) { allBtns[j].classList.remove("active"); }
             var activeBtn = document.getElementById("btn-" + index);
             if(activeBtn) activeBtn.classList.add("active");
-
-            document.getElementById('qualityMenu').classList.remove('active');
-            isQualityButtonAdded = false; 
 
             var setupConfig = {
                 file: channel.url,
@@ -368,37 +298,6 @@
                     "stretch-button"
                 );
             });
-
-            // الفحص الذكي لظهور الزرار البديل
-            function checkAndAddQualityButton() {
-                if (isQualityButtonAdded) return;
-                
-                var levels = playerInstance.getQualityLevels();
-                var gearIcon = document.querySelector('.jw-icon-settings');
-                
-                // التأكد إذا كان الترس الافتراضي موجود وظاهر
-                var isNativeGearVisible = false;
-                if (gearIcon) {
-                    var style = window.getComputedStyle(gearIcon);
-                    isNativeGearVisible = (style.display !== 'none' && !gearIcon.classList.contains('jw-hidden'));
-                }
-
-                // إضافة الزرار المخصص فقط إذا كانت الجودات متعددة والترس الافتراضي مفقود
-                if (levels && levels.length > 1 && !isNativeGearVisible) {
-                    var hdIcon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgOHY4TTcgOHY4TTQgMTJoM00xMyA4aDRhMiAyIDAgMCAxIDIgMnY0YTIgMiAwIDAgMS0yIDJoLTR2LTh6Ii8+PC9zdmc+";
-                    
-                    playerInstance.addButton(
-                        hdIcon, 
-                        "تغيير الجودة (بديل طوارئ)", 
-                        function() { toggleQualityMenu(); }, 
-                        "quality-btn"
-                    );
-                    isQualityButtonAdded = true;
-                }
-            }
-
-            playerInstance.on('firstFrame', checkAndAddQualityButton);
-            playerInstance.on('levels', checkAndAddQualityButton);
         }
 
         function filterChannels() {
