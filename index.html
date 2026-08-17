@@ -33,12 +33,6 @@
         .channel-list { flex: 1; overflow-y: auto; padding: 10px; }
         .channel-list::-webkit-scrollbar { width: 6px; }
         .channel-list::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
-        
-        .category-header.world-cup {
-            color: #ffca28; font-size: 16px; font-weight: bold;
-            padding: 10px; border-right: 3px solid #ffca28;
-            background: #332900; border-radius: 4px; margin-bottom: 5px;
-        }
 
         .channel-btn {
             background: #222; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px;
@@ -64,6 +58,30 @@
         .jw-flag-fullscreen .jw-icon-fullscreen {
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNOCAzdjNhMiAyIDAgMCAxLTIgMkgzbTE4IDBoLTNhMiAyIDAgMCAxLTItMlYzbTAgMThoM2EyIDIgMCAwIDEgMiAydjMiLz48L3N2Zz4=');
         }
+
+        /* ستايل القائمة العائمة لاختيار الجودة */
+        .channel-menu {
+            display: none; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px); border: 1px solid #444; border-radius: 12px;
+            padding: 20px; z-index: 99999; flex-direction: column; gap: 10px;
+            min-width: 260px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+        .channel-menu.active {
+            display: flex;
+            animation: popIn 0.2s ease-out;
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: translate(-50%, -45%) scale(0.95); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        .channel-menu-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #444; padding-bottom: 12px; margin-bottom: 10px;
+        }
+        .channel-menu-header h3 { margin: 0; color: #fff; font-size: 16px; }
+        .close-btn { cursor: pointer; color: #ff4d4d; font-size: 26px; line-height: 1; font-weight: bold; transition: 0.2s; }
+        .close-btn:hover { color: #ff1a1a; transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -71,6 +89,15 @@
     <div class="app-container">
         <div class="player-wrapper">
             <div id="player"></div>
+            
+            <div id="qualityMenu" class="channel-menu" dir="rtl">
+                <div class="channel-menu-header">
+                    <h3>تغيير الجودة ⚙️</h3>
+                    <span class="close-btn" onclick="document.getElementById('qualityMenu').classList.remove('active')">&times;</span>
+                </div>
+                <div id="qualityList" style="display:flex; flex-direction:column; gap:5px; max-height: 250px; overflow-y:auto; padding-right:5px;"></div>
+            </div>
+
         </div>
         <div class="sidebar">
             <div class="search-box">
@@ -112,8 +139,8 @@
             { name: "FOX Sports 1 US", url: "https://otte-netskrt.live.pv-cdn.net/pdx-nitro/live/clients/dash/enc/tmpzbbdj9y/out/v1/962736723a534ba294e7592fef49827b/cenc.mpd", k1: "5466ebd70704bdeb657f0abf3c5ca4ef", k2: "bdd79b72d8e48ed483aa623cc38a8a16" },
             { name: "Fox 1 USA", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cizlveblk4/out/v1/e5c36c41621e4384b80427d87199433a/cenc.mpd", k1: "d7d78ea2021a29541136bd5dc8352fe7", k2: "6425ac4c0cdf906fe0cce5cf40dc8933" },
             { name: "Fox 1 USA", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/fsu3wl2rwb/out/v1/be61206c04e643349d53fb22301f3b50/cenc.mpd", k1: "5466ebd70704bdeb657f0abf3c5ca4ef", k2: "bdd79b72d8e48ed483aa623cc38a8a16" },
-            { name: "Fox 2 USA", url: "https://a166aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/awxnrqkbo5/out/v1/716529a4091947b0877e6cb80dbd6ccb/cenc.mpd", k1: "09453ce820d65fbc675de3185f9e454c", k2: "98cff9600995fa381c76fdacf3c7edae" },
             { name: "Fox Sports 1", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/oboxe53wyo/out/v1/f7892a9d706d419a846d738fa22ea33e/cenc.mpd", k1: "2fbdaa3bea0d0323ae011b318d1db716", k2: "8726ef7eaf5b9dce15fb6aa9f80bd53f" },
+            { name: "Fox 2 USA", url: "https://a166aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/awxnrqkbo5/out/v1/716529a4091947b0877e6cb80dbd6ccb/cenc.mpd", k1: "09453ce820d65fbc675de3185f9e454c", k2: "98cff9600995fa381c76fdacf3c7edae" },
             { name: "Fox Sports 2", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/tepjqej1ys/out/v1/c9c9159baee749a19612b1598495859a/cenc.mpd", k1: "8836fb04d62dc64c9f8a39ef8640d5eb", k2: "d4f05ce56c5231b7cdf53455bea58621" },
             { name: "FOX Sports 2 US", url: "https://otte.live.fly.ww.aiv-cdn.net/iad-nitro/live/clients/dash/enc/awxnrqkbo5/out/v1/716529a4091947b0877e6cb80dbd6ccb/cenc.mpd", k1: "09453ce820d65fbc675de3185f9e454c", k2: "98cff9600995fa381c76fdacf3c7edae" },
             { name: "Fox Sports 3", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/wybgz0orr8/out/v1/2f6d1612abd44f5883917f8a585b955f/cenc.mpd", k1: "11c8c1c2ef0385cf1e64d44bb9c3a395", k2: "5769730ffbdc4b2fd8945929d9ace063" },
@@ -129,7 +156,7 @@
             { name: "TSN 4", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/ihys8nw4wv/out/v1/fde190f369484bc6b6117cc16cd82a9f/cenc.mpd", k1: "abc5b2883121012850ebda05b528c5ec", k2: "e5250924f4b738905f7163a0134587a7" },
             { name: "TSN 5", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cscevwljkq/out/v1/972185041b244140860b7d56398e9aaf/cenc.mpd", k1: "385ceb9714b75e0cef61254f80b31002", k2: "18dce92a2891fee68d21ede5173230f8" },
             { name: "CBS SPORTS", url: "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/rbem8rorcw/out/v1/5318821e2c3c44c2a439681b9aa86e9b/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
-            { name: "Cbs Sports", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd", cat: "Live Sports", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
+            { name: "Cbs Sports", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
             { name: "CBS SPORTS", url: "https://jmp2.uk/plu-5e9f2c05172a0f0007db4786.m3u8" },
             { name: "CBS Golazo", url: "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/rbem8rorcw/out/v1/5318821e2c3c44c2a439681b9aa86e9b/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
             { name: "CBS Sports Golazo Network", url: "https://bia-cf.live.pv-cdn.net/iad-nitro/live/clients/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd", k1: "d9623774ac5c8c351aafe97c5fe70267", k2: "5164e6d05164a2d65fa8fcc962aa4861" },
@@ -151,7 +178,7 @@
             { name: "Fox 1 AR", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/enc/ajfoeddkbz/out/v1/b78800b9b2304879b15843f455836829/cenc.mpd", k1: "f6564ec2aee819046328a0e153be574d", k2: "ff46a8a1031eb27ef22576a077c98ab7" },
             { name: "FOX ONE [MX VPN]", url: "https://mxlivechannelsvosdash.clarovideo.com/Content/DASH_DASH_FK/Live/Channel(FOXONE3MX_HD)/manifest.mpd", k1: "3bd0bc0772acc1708445948f2c7bb25f", k2: "426afdc873d71265183d15cd7f9cb612" },
             { name: "FOX Sports 2 MX", url: "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/tepjqej1ys/out/v1/c9c9159baee749a19612b1598495859a/cenc.mpd", k1: "8836fb04d62dc64c9f8a39ef8640d5eb", k2: "d4f05ce56c5231b7cdf53455bea58621" },
-            { name: "Live 2 (LatAm)", url: "https://pull.niues.live/live/stream-599634_lhd.m3u8?auth_key=1778700354-0-0-e96025ef17afc021f3662327a0f74656", k1: null, k2: null },
+            { name: "Live 2 (LatAm)", url: "https://pull.niues.live/live/stream-599634_lhd.m3u8?auth_key=1778700354-0-0-e96025ef17afc021f3662327a0f74656" },
 
             // ==========================================
             // الشبكات البرازيلية
@@ -193,10 +220,10 @@
             { name: "Real Madrid TV EN", url: "https://rmtv.akamaized.net/hls/live/2043154/rmtv-en-web/master.m3u8" },
             { name: "Real Madrid TV ES", url: "https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8" },
             { name: "Barca TV", url: "https://amg17560-fcb-amg17560c1-rakuten-uk-4891.playouts.now.amagi.tv/playlist/amg17560-fcbarcelona-topbarcaenglish-rakutenuk/playlist.m3u8" },
-            { name: "Inter TV", url: "https://amg27604-amg27604c1-amgplt0165.playout.now3.amagi.tv/playlist/amg27604-amg27604c1-amgplt0165/playlist.m3u8?" },
+            { name: "Inter TV", url: "https://amg27604-amg27604c1-amgplt0165.playout.now3.amagi.tv/playlist/amg27604-amg27604c1-amgplt0165/playlist.m3u8" },
             { name: "MU TV", url: "https://fastly.live.brightcove.com/6374054671112/eu-west-1/6058004203001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoiYXplMnp5LmVncmVzcy55ODN1ZWIiLCJhY2NvdW50X2lkIjoiNjA1ODAwNDIwMzAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI2MDU4MDA0MjAzMDAxIl0sImp0aSI6IjYzNzQwNTQ2NzExMTIifQ.3FmuTna3DAmY7xlhK5fk6LMrosrtrR5VsU2QOgYO5y4/playlist-hls.m3u8" },
             { name: "EUROSPORT 1", url: "https://cache07.zapitv.com/live/eds_c2/eurosport_1_hd/dash_live_ez/eurosport_1_hd.mpd", k1: "0f4751abc997473d9138d17b5944be04", k2: "a0aefedd2376a54b8b50f9b7c2d50ac7" },
-            { name: "EuroSport 1 CT", url: "https://dash2.antik.sk/stream/nvidia_eurosport1/playlist_cenc.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d", },
+            { name: "EuroSport 1 CT", url: "https://dash2.antik.sk/stream/nvidia_eurosport1/playlist_cenc.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
             { name: "EUROSPORT 2", url: "https://cache01.zapitv.com/live/eds_c2/eurosport_2_hd/dash_live_ez/eurosport_2_hd.mpd", k1: "e369d9ab101d4b60ba13c0384f503528", k2: "041e35e31381521b3398af5c6dd99414" },
             { name: "EuroSport 2 CT", url: "https://dash2.antik.sk/stream/nvidia_eurosport2/playlist_cenc.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
             
@@ -236,27 +263,20 @@
             { name: "TV AZTECA MX", url: "https://azt-cl.otteravision.com/azt/cl/cl.m3u8" },
             { name: "RCN + COL", url: "https://rcntv-rcnmas-1-us.roku.wurl.tv/playlist.m3u8" },
             { name: "Tv J 🇯🇲", url: "https://vod2live.univtec.com/manifest/a99a1804-dc83-411f-8c1c-b62f08cdfa59.m3u8" },
-            { name: "Channel 5 Sing", url: "https://tglmp02.akamaized.net/out/v1/a32e566460eb41ce9295b9c45fe25825/manifest.mpd", k1: "cc3767ece98a4bdeb39b9ad6b7b8d2fe", k2: "769e78dc02d8f73811c97e0f9d5f12fe" },
+            { name: "Channel 5 Sing", url: "https://tglmp02.akamaized.net/out/v1/a32e566460eb41ce9295b9c45fe25825/manifest.mpd", k1: "cc3767ece98a4bdeb39b9ad6b7b8d2fe", k2: "769e78dc02d8f73811c97e0f9d5f12fe" }
         ];
 
         var playerInstance = null;
+        var isQualityButtonAdded = false;
 
         function renderChannels(filterText) {
             if (!filterText) filterText = "";
             var listContainer = document.getElementById("channelList");
             listContainer.innerHTML = "";
-            var addedWorldCupHeader = false;
 
             for (var i = 0; i < channels.length; i++) {
                 var channel = channels[i];
                 if (channel.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1) {
-                    if (channel.isWorldCup && !addedWorldCupHeader && filterText === "") {
-                        var wcHeader = document.createElement("div");
-                        wcHeader.className = "category-header world-cup";
-                        wcHeader.innerText = "🏆 World Cup 2026";
-                        listContainer.appendChild(wcHeader);
-                        addedWorldCupHeader = true;
-                    }
 
                     var btn = document.createElement("div");
                     btn.className = "channel-btn";
@@ -274,12 +294,49 @@
             }
         }
 
+        // دالة إظهار القائمة العائمة لاختيار الجودة
+        function toggleQualityMenu() {
+            var menu = document.getElementById('qualityMenu');
+            if(menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                return;
+            }
+            
+            var levels = playerInstance.getQualityLevels();
+            var currentQuality = playerInstance.getCurrentQuality();
+            var listContainer = document.getElementById('qualityList');
+            listContainer.innerHTML = '';
+            
+            if(levels && levels.length > 1) {
+                levels.forEach(function(lvl, index) {
+                    var btn = document.createElement('div');
+                    btn.className = 'channel-btn';
+                    if(index === currentQuality) btn.classList.add('active');
+                    
+                    // استخراج اسم الجودة بشكل متناسق
+                    var qualityName = lvl.label || (lvl.height ? lvl.height + 'p' : 'جودة ' + (index + 1));
+                    btn.innerHTML = '<span>' + qualityName + '</span>';
+                    
+                    btn.onclick = function() {
+                        playerInstance.setCurrentQuality(index);
+                        menu.classList.remove('active');
+                    };
+                    listContainer.appendChild(btn);
+                });
+            }
+            menu.classList.add('active');
+        }
+
         function playChannel(index) {
             var channel = channels[index];
             var allBtns = document.querySelectorAll(".channel-btn");
             for (var j = 0; j < allBtns.length; j++) { allBtns[j].classList.remove("active"); }
             var activeBtn = document.getElementById("btn-" + index);
             if(activeBtn) activeBtn.classList.add("active");
+
+            // إخفاء قائمة الجودات لو كانت مفتوحة وتصفير الزرار
+            document.getElementById('qualityMenu').classList.remove('active');
+            isQualityButtonAdded = false; 
 
             var setupConfig = {
                 file: channel.url,
@@ -298,6 +355,7 @@
                 var isStretched = false;
                 var diagonalCutArrow = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQgMTBsNy03bS02IDBoNnY2bS0xMSA1bC03IDdtNiAwSDN2LTYiLz48L3N2Zz4=";
 
+                // زرار التوسيع الافتراضي
                 playerInstance.addButton(
                     diagonalCutArrow, 
                     "توسيع/تضييق الصورة", 
@@ -312,6 +370,21 @@
                     },
                     "stretch-button"
                 );
+            });
+
+            // הפحص الذكي: إضافة زرار الجودة كـ "حل طوارئ" فقط لو الرابط فيه أكثر من جودة
+            playerInstance.on('levels', function(e) {
+                if (e.levels && e.levels.length > 1 && !isQualityButtonAdded) {
+                    var hdIcon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgOHY4TTcgOHY4TTQgMTJoM00xMyA4aDRhMiAyIDAgMCAxIDIgMnY0YTIgMiAwIDAgMS0yIDJoLTR2LTh6Ii8+PC9zdmc+";
+                    
+                    playerInstance.addButton(
+                        hdIcon, 
+                        "تغيير الجودة (متعدد)", 
+                        function() { toggleQualityMenu(); }, 
+                        "quality-btn"
+                    );
+                    isQualityButtonAdded = true;
+                }
             });
         }
 
