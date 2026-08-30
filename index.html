@@ -98,10 +98,10 @@
         <div class="sidebar">
             <div class="search-box">
                 <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="ابحث عن قناة هنا..." onkeyup="filterChannels()">
                     <button class="home-btn" onclick="goHome()" title="العودة للرئيسية وإيقاف البث">
                         <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                     </button>
+                    <input type="text" id="searchInput" placeholder="ابحث عن قناة هنا..." onkeyup="filterChannels()">
                 </div>
             </div>
             <div class="channel-list" id="channelList"></div>
@@ -128,6 +128,8 @@
             { name: "TNT SPORTS 1", url: "https://a96aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/rhf2dwosdt/out/v1/ee550d2a68d846c797e6ce4de2e8b76d/cenc.mpd", k1: "69a5aa835a061ce64a630d1046727e40", k2: "d02feac8a999bd06bf4059bf33411749" },
             { name: "TNT Sports 1", url: "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/rhf2dwosdt/out/v1/ee550d2a68d846c797e6ce4de2e8b76d/cenc.mpd", k1: "69a5aa835a061ce64a630d1046727e40", k2: "d02feac8a999bd06bf4059bf33411749" },
             { name: "TNT SPORTS 2", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/puehlftk5j/out/v1/f7f0da1ee112481ca0024e6d4dd97f4a/cenc.mpd", k1: "f3df7843080ae743bf865dc5fdf64c68", k2: "567c863bc12eb74788ea74888c042e1b" },
+            { name: "TNT SPORTS 3", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/dev1hjwzh9/out/v1/a5f0ee7ad7b24906b14f43bebbbe4678/cenc.mpd", k1: "cc91508324ce9dcaf425a43d58f1d9d4", k2: "643e5474d9edd87c7d9091c8c97994ca" },
+            { name: "TNT SPORTS 4", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/tdijwiga2k/out/v1/f5fde318678f4f7583bf27b7231bde1f/cenc.mpd", k1: "fa34fa8c90336dd528c7a23871cad1fe", k2: "552a78d1aeb74f1650d68255c5749408" },
             
             // ==========================================
             // باقة قنوات beIN SPORTS الأسترالية
@@ -266,10 +268,13 @@
             // ==========================================
             // قنوات أسيوية التي تنقل المباريات
             // ==========================================
+            { name: "FANCODE 1", url: "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/b3b3fkmrbl/out/v1/1084d5c9a97a4c5b9f9554c88f486646/cenc.mpd", k1: "82dfca238e8c4b430a3269db71965db9", k2: "a00b28caf4ac628e77a553d440c0ddca" },
+            { name: "FANCODE 2", url: "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/avqlywnuzx/out/v1/aefca6420f944a9482e117f315de535f/cenc.mpd", k1: "1994b1df7dfd2e8a8d7b9bf3fb900285", k2: "22a1444b3da18e139191665b3d652835" },
             { name: "SPOTV", url: "https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_spotvhd.mpd", k1: "ec7ee27d83764e4b845c48cca31c8eef", k2: "9c0e4191203fccb0fde34ee29999129e" },
             { name: "SPOTV2", url: "https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_spotv2hd.mpd", k1: "7eea72d6075245a99ee3255603d58853", k2: "6848ef60575579bf4d415db1032153ed" },
             { name: "MeWatch 1 🇸🇬", url: "https://tglmp04.akamaized.net/out/v1/898b1cbac7c747e3b1f3deb460e9b67e/manifest.mpd", k1: "60dc08aae52f4c0b806a8e43f24a12c8", k2: "30d5b579966d822b215ec51a91d8a271" },
             { name: "MeWatch 2 🇸🇬", url: "https://tglmp02.akamaized.net/out/v1/3170252e3fb0453085f2f4b0f8401a6b/manifest.mpd", k1: "60dc08aae52f4c0b806a8e43f24a12c8", k2: "30d5b579966d822b215ec51a91d8a271" },
+            { name: "MAX SPORT(Indo)", url: "https://cdnbal1.indihometv.com/atm/DASH/useesport/manifest.mpd" },
             { name: "Himalaya Sports Nepal", url: "https://ottlive.dishhome.com.np/protected/GgTOzZkB0RDJ74Ryniuo/dash/manifest.mpd", k1: "220d8978f3fd45b696137c5b94f7a264", k2: "7bfe13500edee4f837ec03a907896306" },
             { name: "SPORT UZ", url: "https://stream9.itv.uz/t/EbO9UWuxHhEUHe_q9Bj_0Q/e/1759836672/1004/tracks-v1a1/timeshift_rel-74.m3u8" },
 
@@ -287,8 +292,9 @@
             { name: "Channel 4 EN", url: "https://olsp.live.dash.c4assets.com/dash_iso_sp_tl/live/channel(4s)/manifest.mpd", k1: "0000000000000000000000000034730a", k2: "19bfb83e0e0f40f6eef4eccedbfa7bb8" },
             { name: "Channel 4 EN", url: "https://olsp.live.dash.c4assets.com/dash_iso_sp_tl/live/channel(c4)/manifest.mpd", k1: "0000000000000000000000000063340a", k2: "5ce85f1aa5771900b952f0ba58857d7a" },
             { name: "E4 EN", url: "https://olsp.live.dash.c4assets.com/dash_iso_sp_tl/live/channel(e4)/manifest.mpd", k1: "0000000000000000000000000065340a", k2: "88a5d26b2dc54896693dea815df7c592" },
-            { name: "Canale 5 It", url: "https://live03p-seg.msf.cdn.mediaset.net/live/ch-c5/c5-dash-widevine.isml/manifest.mpd", k1: "00f9f3c0783536b8ce4a30a01a52e082", k2: "e926f7d45af4f7d154c990eae6a2d937" },
             { name: "ITALIA 1 It", url: "https://live03p-seg.msf.cdn.mediaset.net/live/ch-i1/i1-dash-widevine.isml/manifest.mpd", k1: "00f9f3c0783536b8ee91704e23b78016", k2: "bfd04d6f544c9cc4d35cb13ab6778587" },
+            { name: "Canale 5 It", url: "https://live03p-seg.msf.cdn.mediaset.net/live/ch-c5/c5-dash-widevine.isml/manifest.mpd", k1: "00f9f3c0783536b8ce4a30a01a52e082", k2: "e926f7d45af4f7d154c990eae6a2d937" },
+            { name: "NOVE It", url: "https://streaming.aurora.enhanced.live/live/mpc/enl0eG1mLmVncmVzcy5mZDJ2eHI=/out/v1/IT_SIMULCAST/NOVE/CMAF/index.m3u8" },
             { name: "M6 Sport FR", url: "https://origin-m6web.live.6cloud.fr/out/v1/6play/6play-m6/cmaf_cenc00/dash-short-hd.mpd", k1: "433ffba670963e70857859a9dff4be04", k2: "51ede3a821229fe81e71282c8eff80e3" },
             { name: "Rtp1 POR (vpn)", url: "https://streaming-live.rtp.pt/liverepeater/smil:rtp1HD.smil/playlist.m3u8" },
             { name: "ARD Das Erste GER (Vpn)", url: "https://daserste-live.ard-mcdn.de/daserste/live/hls/de/master.m3u8" },
