@@ -45,6 +45,23 @@
         .channel-list::-webkit-scrollbar { width: 6px; }
         .channel-list::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
 
+        /* تنسيق عناوين أقسام القنوات */
+        .category-header {
+            background: #1a1a1a;
+            color: #1dcf60;
+            padding: 10px 15px;
+            margin: 15px 0 10px 0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #333;
+            border-bottom: 3px solid #1dcf60;
+        }
+        .category-header:first-child {
+            margin-top: 0;
+        }
+
         .channel-btn {
             background: #222; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px;
             cursor: pointer; font-weight: bold; font-size: 14px; transition: all 0.2s ease;
@@ -98,10 +115,10 @@
         <div class="sidebar">
             <div class="search-box">
                 <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="ابحث عن قناة هنا..." onkeyup="filterChannels()">
                     <button class="home-btn" onclick="goHome()" title="العودة للرئيسية وإيقاف البث">
                         <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                     </button>
-                    <input type="text" id="searchInput" placeholder="ابحث عن قناة هنا..." onkeyup="filterChannels()">
                 </div>
             </div>
             <div class="channel-list" id="channelList"></div>
@@ -113,6 +130,7 @@
             // ==========================================
             // القنوات العربية
             // ==========================================
+            { header: "القنوات العربية" },
             { name: "StarzPlay 1", url: "https://sps1.starzplayarabia.com/out/v1/eee188845e9543699fd24e5a9890c6e2/index.mpd", k1: "b253c726c24c7c94a3ddf9b1907e2c76", k2: "097963d6ad73c3d712a104981de0ed42" },
             { name: "StarzPlay 2", url: "https://sps2.starzplayarabia.com/out/v1/15e7d1ffb99746dda03f71dbbbc3c08b/index.mpd", k1: "ee861edcd99093153a763a94b14c2c5a", k2: "ab3991f6a7729ba1ea4bcdba0c1ae6c0" },
             { name: "StarzPlay 3", url: "https://sps3.starzplayarabia.com/out/v1/95528122fa434bcd948c9ed2e7afabee/index.mpd", k1: "117c29396ec6fd295880013241a466e1", k2: "3dfb883251884e66d784111877c44b13" },
@@ -123,6 +141,7 @@
             // ==========================================
             // الشبكات البريطانية ( TNT & Premier)
             // ==========================================
+            { header: "الشبكات البريطانية ( TNT & Premier)" },
             { name: "Premier 1 UK", url: "https://a166aivottlinear-a.akamaihd.net/OTTB/fra-nitro/live/dash/enc/vwq77hfgzw/out/v1/b858e0b845c64cec953887bd4269e4ea/cenc.mpd", k1: "1444f4235529f183f0a5a486befe9cdb", k2: "e5e3fec67a1bb3472a2089c8a0a2557f" },
             { name: "Premier 2 UK", url: "https://a205aivottlinear-a.akamaihd.net/IAD/lhr-nitro/live/clients/dash/enc/bcj3iscpd6/out/v1/fcd137b391214f7cb99dd4d7be90ca87/cenc.mpd", k1: "1a5df53609ebc9857898c490f4724918", k2: "77f62980d582ec541280796acf8b2d19" },
             { name: "TNT SPORTS 1", url: "https://a96aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/rhf2dwosdt/out/v1/ee550d2a68d846c797e6ce4de2e8b76d/cenc.mpd", k1: "69a5aa835a061ce64a630d1046727e40", k2: "d02feac8a999bd06bf4059bf33411749" },
@@ -134,6 +153,7 @@
             // ==========================================
             // باقة قنوات beIN SPORTS الأسترالية
             // ==========================================
+            { header: "باقة قنوات beIN SPORTS الأسترالية" },
             { name: "beIN Sports 1", url: "https://a166aivottlinear-a.akamaihd.net/OTTB/syd-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1/83536910d8034e9b9895a20fbe1c1687/cenc.mpd", k1: "335dad778109954503dcbb21dc92015f", k2: "24bfd75d436cbf73168a2a2dccd40281" },
             { name: "beIN Sports 2", url: "https://a166aivottlinear-a.akamaihd.net/OTTB/syd-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1/83985c68e4174e90a58a1f2c024be4c9/cenc.mpd", k1: "0b42be2664d7e811d04f3e504e0924c5", k2: "ae24090123b8c72ac5404dc152847cb8" },
             { name: "beIN Sports 3", url: "https://a201aivottlinear-a.akamaihd.net/OTTB/syd-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd", k1: "7995c724a13748ed970840a8ab5bb9b3", k2: "67bdaf1e2175b9ff682fcdf0e2354b1e" },
@@ -141,6 +161,7 @@
             // ==========================================
             // باقة قنوات MATCH الرياضية الروسية
             // ==========================================
+            { header: "باقة قنوات MATCH الرياضية الروسية" },
             { name: "MATCH! 🇷🇺 (vpn)", url: "https://video.beeline.tv/live/d/channel317.isml/manifest-stb.mpd", k1: "5e1c798b16d24dc8cbfc7819abf77b4d", k2: "4ba5d9aeba2239b425d1cf7b45474333" },
             { name: "MATCH! FOOTBALL 1 🇷🇺 (vpn)", url: "https://video.beeline.tv/live/d/channel319.isml/manifest-stb.mpd", k1: "9145a6e0f778e61866f573d4944dd533", k2: "d02173d40515fea5c83944f21d0f3114" },
             { name: "MATCH! FOOTBALL 2 🇷🇺 (vpn)", url: "https://video.beeline.tv/live/d/channel320.isml/manifest-stb.mpd", k1: "ce7cf9b28d1a8d874accebc44d7e1fcd", k2: "cda18d4d20abd5cc778315abe277feb9" },
@@ -153,6 +174,7 @@
             // ==========================================
             // باقة قنوات Sport Tv& Dazn البرتغالية
             // ==========================================
+            { header: "باقة قنوات Sport Tv & Dazn البرتغالية" },
             { name: "Sport TV 1 UHD (vpn)", url: "https://rr.cdn.vodafone.pt/LIVE/sdash/LIVE$151/index.mpd/Manifest.mpd?start=LIVE&end=END&device=CMAFDASH_HEVC_UHD", k1: "d012322fb2db4c929a66417c1fa40b00", k2: "eac803603f1b2e4658e0f9da317fd05b" },
             { name: "Sport TV 2 (vpn)", url: "https://rr.cdn.vodafone.pt/LIVE/sdash/LIVE$152/index.mpd/Manifest.mpd?start=LIVE&end=END&device=DASH_AVC_HD", k1: "0d28edf4f055409bb12d6d0260b26b6b", k2: "bf69f8a33c39c31f5ff06ab52012e27c" },
             { name: "Sport TV 3 (vpn)", url: "https://rr.cdn.vodafone.pt/LIVE/sdash/LIVE$153/index.mpd/Manifest.mpd?start=LIVE&end=END&device=DASH_AVC_HD", k1: "206fec56f5b741e5aa81124895d9b592", k2: "27b91505aa6926f59199c828bc27767b" },
@@ -169,6 +191,7 @@
             // ==========================================
             // الشبكات الأمريكية والكندية 
             // ==========================================
+            { header: "الشبكات الأمريكية والكندية" },
             { name: "beIN XTRA En", url: "https://d9ssxzmclhfo4.cloudfront.net/bein_sports.m3u8" },
             { name: "beIN XTRA ES", url: "https://bein-esp-xumo.amagi.tv/playlist.m3u8" },
             { name: "FOX Deportes", url: "https://a122aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/clients/dash/enc/vkpoljjpkj/out/v1/502bcf68b3514cd28a220e6f0a43816f/cenc.mpd", k1: "d1a163914db8ffad2c3e94f979896a0d", k2: "9728800a3959aafdd5b0bcfbf3768811" },
@@ -207,6 +230,7 @@
             // ==========================================
             // الشبكات اللاتينية والإسبانية
             // ==========================================
+            { header: "الشبكات اللاتينية والإسبانية" },
             { name: "DSports", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/dash/enc/3gg2jnixjn/out/v1/e1840e01f3f14563b66bbb944d5cc54c/cenc.mpd", k1: "f8b207c10f3f76aeba32a360ec52b9e4", k2: "afad49d20eb39670e93e371c1d669921" },
             { name: "D Sports", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/x0srg3jjpz/out/v1/f779c49314394d61886d63f58d9d52e4/cenc.mpd", k1: "4f4c3a9912ea752e88f4497864a1bc8b", k2: "278128004fe8c6ffb2cd2a0c154a241a" },   
             { name: "D Sports+", url: "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/kp7qfx2tly/out/v1/bbfb730b45b74d4ea875d75786ea3f13/cenc-sd.mpd", k1: "8afa490e1640be969729fb459182e4ec", k2: "6f129820cdd5b6978a98c604c72cf05b" },
@@ -220,6 +244,7 @@
             // ==========================================
             // الشبكات البرازيلية
             // ==========================================
+            { header: "الشبكات البرازيلية" },
             { name: "Caze TV", url: "https://a121aivottepl-a.akamaihd.net/gru-nitro/live/clients/dash/enc/jo3rmhhp2r/out/v1/50656942ce4e40a1be824c9d83578fe9/cenc.mpd", k1: "34475edab991ad5e92548aebd710410a", k2: "501b209cccd323ac00bf5ac15b406cb4" },
             { name: "BANDSPORTS", url: "https://cdn-brisanet.cportal.com.br/BANDEIRANT/DASH/stream.mpd", k1: "bf4ed0d53f284514a5724052736edd13", k2: "b374c809058541966bed5e4716af55f4" },
             { name: "N Sports", url: "https://ogc-nsprt.otteravision.com/ogc/nsprt/nsprt.m3u8", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
@@ -227,6 +252,7 @@
             // ==========================================
             // الشبكات الأوروبية
             // ==========================================
+            { header: "الشبكات الأوروبية" },
             { name: "CT Sport", url: "https://dash2.antik.sk/stream/nvidia_ct_sport/playlist_cenc.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
             { name: "Nova Sport 1 CT ", url: "https://dash2.antik.sk/stream/nvidia_nova_sport1/playlist_cenc.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
             { name: "Nova Sport 2 CT", url: "https://dash2.antik.sk/stream/nvidia_nova_sport2/playlist_cenc.mpd", k1: "11223344556677889900112233445566", k2: "4b80724d0ef86bcb2c21f7999d67739d" },
@@ -268,6 +294,7 @@
             // ==========================================
             // قنوات أسيوية التي تنقل المباريات
             // ==========================================
+            { header: "قنوات أسيوية تنقل المباريات" },
             { name: "FANCODE 1", url: "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/b3b3fkmrbl/out/v1/1084d5c9a97a4c5b9f9554c88f486646/cenc.mpd", k1: "82dfca238e8c4b430a3269db71965db9", k2: "a00b28caf4ac628e77a553d440c0ddca" },
             { name: "FANCODE 2", url: "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/avqlywnuzx/out/v1/aefca6420f944a9482e117f315de535f/cenc.mpd", k1: "1994b1df7dfd2e8a8d7b9bf3fb900285", k2: "22a1444b3da18e139191665b3d652835" },
             { name: "SPOTV", url: "https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_spotvhd.mpd", k1: "ec7ee27d83764e4b845c48cca31c8eef", k2: "9c0e4191203fccb0fde34ee29999129e" },
@@ -281,6 +308,7 @@
             // ==========================================
             // القنوات الترفيهية التي تنقل المباريات
             // ==========================================
+            { header: "القنوات الترفيهية التي تنقل المباريات" },
             { name: "ΕΡΤ1 GR", url: "https://ert-live.siliconweb.com/bpk-tv/ERT1/drm/index.mpd", k1: "8011d97516cf5853846112834cb9bd8f", k2: "726916a29a0a349cb828c34503087528" },
             { name: "ΕΡΤ2 GR", url: "https://ert-live.siliconweb.com/bpk-tv/ERT2/drm/index.mpd", k1: "0cbd5b84b71b52868db8dff76aea048b", k2: "c229f59c5ca8263292876ed306ccd110" },
             { name: "ΕΡΤ3 GR", url: "https://ert-live.ascdn.broadpeak.io/bpk-tv/ERT3/default/index.mpd" },
@@ -317,12 +345,25 @@
 
             for (var i = 0; i < channels.length; i++) {
                 var channel = channels[i];
+                
+                // إضافة عرض الفواصل (العناوين)
+                if (channel.header) {
+                    // إذا كان يبحث، نقوم بإخفاء العناوين لنظهر القنوات فقط
+                    if (filterText === "") {
+                        var headerDiv = document.createElement("div");
+                        headerDiv.className = "category-header";
+                        headerDiv.innerText = channel.header;
+                        listContainer.appendChild(headerDiv);
+                    }
+                    continue;
+                }
+
                 if (channel.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1) {
 
                     var btn = document.createElement("div");
                     btn.className = "channel-btn";
                     btn.id = "btn-" + i;
-                    var typeBadge = channel.url.indexOf(".m3u8") !== -1 ? "HLS" : "DASH";
+                    var typeBadge = channel.url ? (channel.url.indexOf(".m3u8") !== -1 ? "HLS" : "DASH") : "";
 
                     btn.innerHTML = '<span>' + channel.name + '</span>' +
                                     '<span style="font-size: 10px; color: #aaa; background: #333; padding: 2px 6px; border-radius: 4px;">' + typeBadge + '</span>';
