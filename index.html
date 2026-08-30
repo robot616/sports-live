@@ -29,11 +29,11 @@
         .search-container { display: flex; gap: 10px; align-items: center; }
         
         .home-btn {
-            background: #1dcf60; border: none; border-radius: 6px; padding: 10px;
+            background: #111; border: 1px solid #444; border-radius: 6px; padding: 10px;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s ease; color: #fff; flex-shrink: 0;
+            transition: all 0.2s ease; color: #ccc; flex-shrink: 0;
         }
-        .home-btn:hover { background: #17a94c; }
+        .home-btn:hover { background: #333; color: #fff; border-color: #666; }
         .home-btn svg { width: 22px; height: 22px; fill: currentColor; }
 
         .search-box input {
@@ -98,10 +98,10 @@
         <div class="sidebar">
             <div class="search-box">
                 <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="ابحث عن قناة هنا..." onkeyup="filterChannels()">
                     <button class="home-btn" onclick="goHome()" title="العودة للرئيسية وإيقاف البث">
                         <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                     </button>
-                    <input type="text" id="searchInput" placeholder="ابحث عن قناة هنا..." onkeyup="filterChannels()">
                 </div>
             </div>
             <div class="channel-list" id="channelList"></div>
